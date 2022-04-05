@@ -1,5 +1,6 @@
-const res = require("express/lib/response");
+
 const Flight = require("../models/flight");
+const Ticket = require('../models/ticket');
 
 module.exports = {
   index,
@@ -41,12 +42,11 @@ function newFlight(req, res) {
 }
 
 function show(req, res) {
-    Flight.findById(req.params.id, function (err, flightDatabase) { // allows us to access specific flight by id
+    Flight.findById(req.params.id, function (err, flight) { // allows us to access specific flight by id
       
-		
-      Flight.find({flight: flight._id}, function(err){
+      Ticket.find({flight: flight._id}, function(err, tickets){
         
-          res.render('flights/show', {flight, });
+          res.render('flights/show', {title: 'Flight Details', flight, tickets });
         })
       })
     }

@@ -19,16 +19,33 @@
         </tr>
     </table>
 
+    <div id="ticket-chart">
+      <h3>Tickets</h3>
+      <table>
+          <tr>
+              <th>Seat</th>
+              <th>Price</th>
+          </tr>
+          <tr>
+          <% tickets.forEach(t => { %>
+              <td><%= t.seat %> </td>
+              <td><%= t.price %> </td>
+          </tr>
+          <% }) %>
+      </table>
+      </div>
+      <button><a href="/flights/<%= flight._id %>/tickets/new">Create New Ticket</a></button>
 
     <h2>Enter Destination Details</h2>
     <form action="/flights/<%= flight._id %>/destinations" method="POST">
         <label>Airport:
-            <select name="airport">
-            <option value="AUS">AUS</option>
-            <option value="DFW">DFW</option>
-            <option value="DEN">DEN</option>
-            <option value="LAX">LAX</option>
-            <option value="SAN">SAN</option>
+          <select name="airport"></select>
+          <option value="ATL">ATL</option>
+          <option value="DFW">DFW</option>
+          <option value="DEN">DEN</option>
+          <option value="LAX">LAX</option>
+          <option value="SAN">SAN</option>
+          <option value="AUS">AUS</option>
         </select>
         </label><br>
         <label>Arrival Date/Time:
@@ -38,6 +55,15 @@
         </label>
     </form>
 
+    <% if (flight.destinations.length) { %> 
+      <% flight.destinations.forEach(d => { %>
+          <div>Airport: <%= d.airport %> </div>
+          <div>Date: <%= d.arrival.toDateString() %> </div>
+          <div>Time: <%= d.arrival.toLocaleTimeString() %> </div>
+          <% }) %>
+  <% } else { %>
+      <div></div>
+  <% } %>
 
     <% if (flight.destinations.length) { %>
         <table>
