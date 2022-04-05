@@ -6,7 +6,7 @@ module.exports = {
 };
 
 function create(req, res){
-    console.log(req.body)
+   
     Flight.findById(req.params.id, function(err, flightDatabase){
         flightDatabase.destinations.push(req.body); //pushes contents of form into destinations array
         flightDatabase.save(function(err){

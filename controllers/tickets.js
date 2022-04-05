@@ -9,16 +9,20 @@ module.exports = {
 
 
 function create(req, res) {
-  req.body.flight = req.params.id 
+  Flight.findById(req.params.id, function(err, flightDatabase){
+  req.body.flight = flightDatabase._id 
+  console.log(flightDatabase)
 	Ticket.create(req.body, function(err, ticket) {
-		res.redirect(`/flights/${flight._id}`)
+		res.redirect(`/flights/tickets${flight._id}`)
 	});
+  })
 }
 
 function deleteTicket(req,res){
-    ticket.findByIdAndDelete(req.params.ticketId, function(err,ticket){
+    Ticket.findByIdAndDelete(req.params.ticketId, function(err,ticket){
         Flight.findById(req.params.id, function(err,flight){
             res.redirect(`/flights/${flight.id}`)
         })
     })
 }
+
