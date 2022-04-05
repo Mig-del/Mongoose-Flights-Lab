@@ -1,0 +1,28 @@
+
+  <%- include('../partials/header')  %> 
+  <h3>All Flights</h3>
+  <div class="table">
+  <table id="sortable"> 
+      <thead>
+      <tr>
+          <th>Airline</th>
+          <th>Airport</th>
+          <th>Flight Number</th>
+          <th>Departure<br>Date</th>
+          <th>Departure<br>Time</th>
+      </tr>
+      </thead>                      
+  <tbody>
+      <% flights.forEach(f => { %>
+      <tr>
+          <td><%= f.airline %></td>
+          <td><%= f.airport %></td>
+          <td><%= f.flightNo %></td>
+          <td><%= f.departs %></td>
+          <td><a href="/flights/<%= f._id %>">flight details</a></td>
+      <% }); %>
+      </tr>
+  </tbody>
+  </table>
+  </div>
+<br>
